@@ -1,0 +1,40 @@
+{% set name = "h2o-jpmml" %}
+{% set version = "1.2.5" %}
+
+package:
+  name: {{ name }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/jpmml/jpmml-h2o/archive/refs/tags/{{ version }}.tar.gz
+  sha256: a458e56fc2e8bdcb7cb041306a658aec0e0f7fa6ad0b2bd35a51940d7032621f
+
+build:
+  number: 0
+  skip: True # [win]
+
+requirements:
+  build:
+    - 7zip  # [win]
+    - maven
+  run:
+    - openjdk
+
+test:
+  commands:
+    - test -f $PREFIX/bin/jpmml  # [unix]
+    - if exist %LIBRARY_PREFIX%\bin\jpmml.bat (exit 0) else (exit 1)  # [win]
+    - jpmml --help
+
+about:
+  home: https://github.com/jpmml/jpmml-h2o
+  license: GPL-3.0 license
+  license_file:
+    - LICENSE.txt
+  summary: Java library and command-line application for converting H2O.ai models to PMML
+  dev_url: https://github.com/jpmml/jpmml-h2o
+
+extra:
+  recipe-maintainers:
+    - ianaobi
+    - bradley
