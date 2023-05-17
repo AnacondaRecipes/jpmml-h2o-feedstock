@@ -1,4 +1,4 @@
-{% set name = "h2o-jpmml" %}
+{% set name = "jpmml-h2o" %}
 {% set version = "1.2.5" %}
 
 package:
